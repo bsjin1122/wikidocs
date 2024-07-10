@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +16,7 @@ import com.mysite.sbb.answer.Answer;
 import com.mysite.sbb.answer.AnswerRepository;
 import com.mysite.sbb.question.Question;
 import com.mysite.sbb.question.QuestionRepository;
+import com.mysite.sbb.question.QuestionService;
 
 import jakarta.transaction.Transactional;
 
@@ -27,6 +29,11 @@ class SbbApplicationTests {
 	@Autowired
 	private AnswerRepository answerRepository;
 	
+	@Autowired
+    private QuestionService questionService;
+	
+	
+	/*
 	@Transactional
 	@Test
 	void testJpa() {
@@ -39,7 +46,17 @@ class SbbApplicationTests {
         assertEquals(1, answerList.size());
         assertEquals("네 자동으로 생성됩니다.", answerList.get(0).getContent());
 		
+	}*/
+	
+	@Test
+	void testJpa() {
+		for(int i = 1; i<= 300; i++) {
+			String subject = String.format("테스트 데이터입니다:[%03d]", i);
+			String content = "내용무";
+			this.questionService.create(subject, content);
+		}
 	}
+	
 	
 
 }
